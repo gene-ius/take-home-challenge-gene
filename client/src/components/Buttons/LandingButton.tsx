@@ -4,19 +4,19 @@ import 'assets/stylesheets/styles.scss'
 interface ButtonProps {
     text: string
     location: string
-    highlight: string
+    highlight: boolean
 }
 
 const LandingButton : FC<ButtonProps> = (props: ButtonProps) => {
 
-    const handleClick = (location) => {
+    const handleClick = (location: string) => {
         //TODO Update Query for specific location
     }
 
   return (
-    <button onClick={() => {handleClick(props.location)}} style={}>
+    <div className='landingButton' onClick={() => {handleClick(props.location)}}>
         {props.text}
-    </button>
+    </div>
   )
 }
 

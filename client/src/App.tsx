@@ -4,11 +4,22 @@ import React from 'react'
 import './assets/stylesheets/styles.scss'
 import '../src/assets/webfonts/Nunito/Nunito-Black.ttf'
 
+import CitySelectorContainer from 'components/Containers/CitySelectorContainer'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+
 
 const App = () => {
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <CitySelectorContainer/>
+    }
+  ])
+  
   return (
     <>
-      <p style={{color: 'white'}}>Good Luck!</p>
+      <RouterProvider router={router}/>
     </>
   ) 
 
