@@ -1,8 +1,21 @@
-import React from 'react'
+import React, { FC } from 'react'
 
-const TabButton = () => {
+
+interface TabButtonProps {
+    selected: boolean
+    text: string
+    tag: string
+}
+
+
+const TabButton : FC<TabButtonProps> = (props) => {
+
+  const handleClick = (tag: string) => {
+    console.log('clicked')
+  }
+
   return (
-    <div>TabButton</div>
+    <div className='tabButton' onClick={() => {handleClick(props.tag)}}>{props.text}</div>
   )
 }
 

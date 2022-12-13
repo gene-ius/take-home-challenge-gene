@@ -1,16 +1,10 @@
 import React , {useEffect, useState, FC} from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
-
-
-interface Event  {
-    name: string
-    groupName: string 
-    eventDay:string
-    flyer: string
-    avi:string
-    url:string
-}
+import {usePromiseTracker, trackPromise } from 'react-promise-tracker'
+import EventCard from './Cards/EventCard'
+import {Event} from  './types'
+import HeaderContainer from './Containers/ExploreHeader'
 
 
 
@@ -45,22 +39,42 @@ type MyParams = {
 
 const Explore : FC = () => {
     const {location , timeframe }  = useParams<keyof MyParams>() as MyParams
+    const {promiseInProgress} = usePromiseTracker();
 
     const [events, setEvents] = useState<Event[]>([])
+    const [loading, setLoader] = useState(true)
 
     useEffect(() => {
-        fetchEvents(location, timeframe).then((res) => {
+
+        trackPromise(fetchEvents(location, timeframe).then((res) => {
             const eventData = res ?? []
             console.log("Should Be event Data",eventData)
             setEvents(eventData)
-        })
+        }))
+
+        return () => {}
 
     }, [])
 
-    console.log('events state,', events)
+    useEffect(() => {
+        console.log(events)
+    }, [events])
+
 
   return (
-    <div className='landingHead'>{events[0] !== undefined ? events[0].name : 'No events here' }</div>
+    <>
+        <div className='exploreHead'>
+            <HeaderContainer/>
+        </div>
+        <div className='exploreBody'>
+            <div className='cardGrid'>
+                {events == null ? 'Loading' : events.map((e, i) =>{
+                    return <EventCard {...e}></EventCard>
+                    }) }
+            </div>
+        </div>
+    </>
+   
   )
 }
 
