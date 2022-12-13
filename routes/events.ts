@@ -16,27 +16,27 @@ router.get('/', async (req, res) => {
 router.get('/:city', async (req, res ) => {
     // Woulde be best practice to check if Point is in NewYork Feature Collection
     // for time sake goint to hardcode but can use d3Geo import possibly.
-    if ( req.params.city == 'newyork') {
+    if ( req.params.city == 'nyc') {
         const events = await Event.where('location.coordinates').equals([
             -73.935242,
             40.73061
           ])
         res.json(events)
 
-    } else if (req.params.city == 'miami') {
+    } else if (req.params.city == 'mia') {
         const events = await Event.where('location.coordinates').equals([
             -80.191788,
             25.761681
           ])
         res.json(events)
 
-    } else if (req.params.city == 'losangeles') {
+    } else if (req.params.city == 'la') {
         const events = await Event.where('location.coordinates').equals([
             -118.321495,
             34.134117
           ])
         res.json(events)
-    } else {
+    } else if (req.params.city = 'near') {
         const events = await Event.where('location.coordinates').equals([
             -73.935242,
             40.73061
@@ -45,7 +45,39 @@ router.get('/:city', async (req, res ) => {
     }
 })
 
-//Create Get all in Time 
+
+router.get('/:city/:time', async (req, res ) => {
+    // Woulde be best practice to check if Point is in NewYork Feature Collection
+    // for time sake goint to hardcode but can use d3Geo import possibly.
+    if ( req.params.city == 'nyc') {
+        const events = await Event.where('location.coordinates').equals([
+            -73.935242,
+            40.73061
+          ])
+        res.json(events)
+
+    } else if (req.params.city == 'mia') {
+        const events = await Event.where('location.coordinates').equals([
+            -80.191788,
+            25.761681
+          ])
+        res.json(events)
+
+    } else if (req.params.city == 'la') {
+        const events = await Event.where('location.coordinates').equals([
+            -118.321495,
+            34.134117
+          ])
+        res.json(events)
+    } else if (req.params.city = 'near') {
+        const events = await Event.where('location.coordinates').equals([
+            -73.935242,
+            40.73061
+          ])
+        res.json(events)
+    }
+})
+
 
 
 

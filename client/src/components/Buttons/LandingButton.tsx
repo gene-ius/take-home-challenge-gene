@@ -1,5 +1,6 @@
 import React , { FC } from 'react'
 import 'assets/stylesheets/styles.scss'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 interface ButtonProps {
     text: string
@@ -8,9 +9,10 @@ interface ButtonProps {
 }
 
 const LandingButton : FC<ButtonProps> = (props: ButtonProps) => {
+    const nav = useNavigate()
 
     const handleClick = (location: string) => {
-        //TODO Update Query for specific location
+        nav(`/events/${props.location}/week`)
     }
 
   return (
