@@ -1,21 +1,23 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 
 
 interface TabButtonProps {
-    selected: boolean
+    selected: string
     text: string
     tag: string
+    clickHandler: (tag: string) => void
 }
 
 
 const TabButton : FC<TabButtonProps> = (props) => {
 
   const handleClick = (tag: string) => {
-    console.log('clicked')
+
+    props.clickHandler(tag)
   }
 
   return (
-    <div className='tabButton' onClick={() => {handleClick(props.tag)}}>{props.text}</div>
+    <div className='tabButton' style={ props.selected == props.tag ? {border: '1px solid #FFCC00' , color:'#FFCC00'} : {}} onClick={() => {handleClick(props.tag)}}>{props.text}</div>
   )
 }
 

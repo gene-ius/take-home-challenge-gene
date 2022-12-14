@@ -48,32 +48,56 @@ router.get('/:city', async (req, res ) => {
 
 router.get('/:city/:time', async (req, res ) => {
     // Woulde be best practice to check if Point is in NewYork Feature Collection
-    // for time sake goint to hardcode but can use d3Geo import possibly.
-    if ( req.params.city == 'nyc') {
+    // for time sake going to hardcode but can use library d3Geo import possibly. (to check if point is in a feature GEOjson)
+    if ( req.params.city == 'nyc' && req.params.time == 'week') {
         const events = await Event.where('location.coordinates').equals([
             -73.935242,
             40.73061
           ])
         res.json(events)
 
-    } else if (req.params.city == 'mia') {
+    } else if (req.params.city == 'mia'&& req.params.time == 'week') {
         const events = await Event.where('location.coordinates').equals([
             -80.191788,
             25.761681
           ])
         res.json(events)
 
-    } else if (req.params.city == 'la') {
+    } else if (req.params.city == 'la' && req.params.time == 'week') {
         const events = await Event.where('location.coordinates').equals([
             -118.321495,
             34.134117
           ])
         res.json(events)
-    } else if (req.params.city = 'near') {
+    } else if (req.params.city == 'near' && req.params.time == 'week') {
         const events = await Event.where('location.coordinates').equals([
             -73.935242,
             40.73061
           ])
+        res.json(events)
+    } else if (req.params.city == 'nyc' && req.params.time == 'today') {
+        const events = await Event.where('location.coordinates').equals([
+            -73.935242,
+            40.73061
+          ]).and({ startUtc: new Date()})
+        res.json(events)
+    } else if (req.params.city == 'mia' && req.params.time == 'today') {
+        const events = await Event.where('location.coordinates').equals([
+            -80.191788,
+            25.761681
+          ]).and({ startUtc: new Date()})
+        res.json(events)
+    } else if (req.params.city == 'la' && req.params.time == 'today') {
+        const events = await Event.where('location.coordinates').equals([
+            -118.321495,
+            34.134117
+          ]).and({ startUtc: new Date()})
+        res.json(events)
+    } else if (req.params.city == 'near' && req.params.time == 'today') {
+        const events = await Event.where('location.coordinates').equals([
+            -73.935242,
+            40.73061
+          ]).and({ startUtc: new Date()})
         res.json(events)
     }
 })

@@ -6,6 +6,7 @@ import EventCard from './Cards/EventCard'
 import {Event} from  './types'
 import HeaderContainer from './Containers/ExploreHeader'
 import TimeframeTabContainer from './Containers/TimeframeTabContainer'
+import { set } from 'lodash'
 
 
 
@@ -33,6 +34,8 @@ const fetchEvents = async (location: string, timeframe: string) => {
     }
 }
 
+
+
 type MyParams = {
     location: string
     timeframe: string
@@ -40,26 +43,33 @@ type MyParams = {
 
 const Explore : FC = () => {
     const {location , timeframe }  = useParams<keyof MyParams>() as MyParams
-    const {promiseInProgress} = usePromiseTracker();
 
+    const [selected, setSelected] = useState('week')
     const [events, setEvents] = useState<Event[]>([])
-    const [loading, setLoader] = useState(true)
+
+    const toggleTab = (tag: string) => {
+        setSelected(tag)
+    }
 
     useEffect(() => {
 
-        trackPromise(fetchEvents(location, timeframe).then((res) => {
+        fetchEvents(location, timeframe).then((res) => {
             const eventData = res ?? []
             console.log("Should Be event Data",eventData)
             setEvents(eventData)
-        }))
+        })
 
         return () => {}
 
     }, [])
 
     useEffect(() => {
-        console.log(events)
-    }, [events])
+        fetchEvents(location, selected).then((res) => {
+            const eventData = res ?? events
+            console.log('Updated Tab Events')
+            setEvents(eventData)
+        })
+    }, [selected])
 
 
   return (
@@ -68,7 +78,7 @@ const Explore : FC = () => {
             <HeaderContainer/>
         </div>
         <div className='exploreBody'>
-            <TimeframeTabContainer/>
+            <TimeframeTabContainer selected={selected} clickHandler={toggleTab}/>
             <div className='cardGrid'>
                 {events == null ? 'Loading' : events.map((e, i) =>{
                     return <EventCard {...e}></EventCard>
