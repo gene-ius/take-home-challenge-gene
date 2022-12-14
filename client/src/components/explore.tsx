@@ -5,6 +5,7 @@ import {usePromiseTracker, trackPromise } from 'react-promise-tracker'
 import EventCard from './Cards/EventCard'
 import {Event} from  './types'
 import HeaderContainer from './Containers/ExploreHeader'
+import TimeframeTabContainer from './Containers/TimeframeTabContainer'
 
 
 
@@ -67,6 +68,7 @@ const Explore : FC = () => {
             <HeaderContainer/>
         </div>
         <div className='exploreBody'>
+            <TimeframeTabContainer/>
             <div className='cardGrid'>
                 {events == null ? 'Loading' : events.map((e, i) =>{
                     return <EventCard {...e}></EventCard>

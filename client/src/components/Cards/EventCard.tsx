@@ -1,11 +1,13 @@
 import React, { FC } from 'react'
 import { Event } from 'components/types'
+import { useNavigate } from 'react-router-dom'
 
 
 
 const EventCard : FC<Event> = (props) => {
 
   const weekday = new Date(props.eventDay).toLocaleDateString(undefined, {weekday: 'short'})
+  const nav = useNavigate();
 
   const cardStyleProps = {
     backgroundImage: `url(${props.flyer})`,
@@ -18,10 +20,8 @@ const EventCard : FC<Event> = (props) => {
   }
 
   const handleClick = (url: string) => {
-
+      window.location.href = `http://posh.vip/e/${url}`
   }
-
-
 
   return (
     <div className='eventCard' style={cardStyleProps} onClick={() => {handleClick(props.url)}}>
