@@ -56,7 +56,6 @@ const Explore : FC = () => {
 
         fetchEvents(location, timeframe).then((res) => {
             const eventData = res ?? []
-            console.log("Should Be event Data",eventData)
             setEvents(eventData)
         })
 
@@ -67,7 +66,6 @@ const Explore : FC = () => {
     useEffect(() => {
         fetchEvents(location, selected).then((res) => {
             const eventData = res ?? events
-            console.log('Updated Tab Events')
             setEvents(eventData)
         })
     }, [selected])

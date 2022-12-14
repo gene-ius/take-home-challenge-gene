@@ -12,6 +12,7 @@ const ErrorEvent : FC = () => {
     <h1 className='errPage'>Oops!</h1>
     <p>Sorry, an unexpected error has occurred.</p>
     <p>
+      {/* // @ts-ignore */}
       <i>{error.status}</i>
       <i>{error.statusText || error.message}</i>
     </p>

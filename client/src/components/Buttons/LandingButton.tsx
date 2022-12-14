@@ -24,7 +24,7 @@ const LandingButton : FC<ButtonProps> = (props: ButtonProps) => {
       width: "10px",
       height: "10px",
       perspective: "500px",
-      colors: [ '#FFCC00' ],
+      colors: props.location != 'near' ? ['#FFCC00', '#E0B400'] : ['#00CCFF', '#00AAD4'],
       
       
     };
@@ -38,7 +38,7 @@ const LandingButton : FC<ButtonProps> = (props: ButtonProps) => {
     }
 
   return (
-    <div className='landingButton' onClick={() => {handleClick(props.location)}}>
+    <div className={props.location != 'near' ? 'landingButton' : 'secondaryLandingButton'} onClick={() => {handleClick(props.location)}}>
         {props.text}
         <div className='fetti'>
             <Confetti active={isActive} config={config}></Confetti>

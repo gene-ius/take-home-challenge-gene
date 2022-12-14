@@ -10,7 +10,6 @@ interface NavbarProps {
 const TimeframeTabContainer: FC<NavbarProps> = (props) => {
 
    const selected = props.selected
-   console.log(selected)
 
   return (
     <div className='exploreTabs'>
