@@ -1,6 +1,6 @@
 import React , {useEffect, useState, FC} from 'react'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
+import { redirect , useParams } from 'react-router-dom'
 import {usePromiseTracker, trackPromise } from 'react-promise-tracker'
 import EventCard from './Cards/EventCard'
 import {Event} from  './types'
@@ -44,11 +44,12 @@ type MyParams = {
 const Explore : FC = () => {
     const {location , timeframe }  = useParams<keyof MyParams>() as MyParams
 
-    const [selected, setSelected] = useState('week')
+    const [selected, setSelected] = useState(timeframe)
     const [events, setEvents] = useState<Event[]>([])
 
     const toggleTab = (tag: string) => {
         setSelected(tag)
+        window.location.href = `http://localhost:3000/events/${location}/${tag}`
     }
 
     useEffect(() => {
@@ -84,6 +85,7 @@ const Explore : FC = () => {
                     return <EventCard {...e}></EventCard>
                     }) }
             </div>
+            {events.length == 0 ? <div className='placeHolder'>{`Damn... No Events Today...  🫠` }</div> : null}
         </div>
     </>
    

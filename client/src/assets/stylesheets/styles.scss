@@ -80,7 +80,7 @@ html, body {
   overflow-x: hidden;
   scroll-behavior: smooth;
   z-index: -2;
-  background-color: $background-dark;
+  background-color: $background-black;
   position: relative;
 }
 
@@ -116,8 +116,14 @@ html, body {
 .landingHead {
   color: $primary;
   text-align: center;
+  animation: fadeIn 5s forwards ease-out;
 }
 
+.fetti{
+  position: relative;
+  left: 175px;
+  top: -30px;
+}
 
 .landingButton {
   border:  1px solid $primary;
@@ -126,9 +132,20 @@ html, body {
   width: 100%;
   justify-content: center;
   text-align: center;
+  align-content: center;
   color: $primary;
   padding: 25px;
   transition-duration: 0.2s;
+  animation: fadeIn 3.5s forwards ease-in;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;  
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .landingButton:hover {
@@ -201,15 +218,25 @@ html, body {
 //BODY
 // EXPLORE CARDS
 
+.placeHolder{
+  margin-top: 12%;
+  text-align: center;
+  color: $primary;
+  font-family: $folsom;
+  font-size: xx-large;
+}
+
 .exploreHead {
   width:100%;
   height:33%;
+  animation: fadeIn 2s forwards ease-out;
 }
 
 .exploreBody {
   padding-left: 25px;
   padding-right: 25px;
   z-index: 1;
+  animation: fadeIn 3s forwards ease-out;
 }
 
 .cardGrid {
